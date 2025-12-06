@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>CB2500 IM Study Guide v6.2 – Per‑User Stats</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      background: #f8fafc;
+      color: #1e293b;
+      font-size: 15px;
+      line-height: 1.5;
+    }
+    header {
+      background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+      padding: 20px;
+      color: white;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    h1 { font-size: 24px; margin: 0; }
+    .version { font-size: 14px; opacity: 0.9; }
+    main {
+      display: grid;
+      grid-template-columns: 360px 1fr;
+      gap: 20px;
+      padding: 20px;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+    @media (max-width: 900px) {
+      main { grid-template-columns: 1fr; }
+    }
+    .card {
+      background: white;
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+      border: 1px solid #e2e8f0;
+    }
+    h2 {
+      margin-top: 0;
+      color: #1e293b;
+      font-size: 18px;
+      border-bottom: 2px solid #3b82f6;
+      padding-bottom: 8px;
+    }
+    h3 { font-size: 16px; color: #1e293b; }
+    ul { padding-left: 20px; }
+    li { margin: 6px 0; }
+    .topic-name { font-weight: 600; color: #1e293b; }
+    .star { color: #dc2626; font-weight: 700; font-size: 18px; margin-left: 4px; }
+    .small { font-size: 13px; color: #64748b; }
+    .pill {
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+      background: #fef3c7;
+      color: #92400e;
+      margin-left: 8px;
+    }
+    .quiz-controls {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-top: 12px;
+    }
+    select, button, input[type="text"] {
+      padding: 10px 12px;
+      border-radius: 8px;
+      border: 2px solid #e2e8f0;
+      font-size: 14px;
+      font-weight: 500;
+    }
+    select {
+      background: white;
+      color: #1e293b;
+    }
+    button {
+      background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+      color: white;
+      cursor: pointer;
+      font-weight: 600;
+      border: none;
+      transition: all 0.2s;
+    }
+    button:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(16,185,129,0.3);
+    }
+    .question-text {
+      font-weight: 700;
+      font-size: 17px;
+      margin-bottom: 16px;
+      line-height: 1.4;
+      background: #f1f5f9;
+      padding: 16px;
+      border-radius: 8px;
+      border-left: 4px solid #3b82f6;
+    }
+    .options {
+      list-style: none;
+      padding-left: 0;
+      margin: 16px 0;
+    }
+    .options li { margin: 12px 0; }
+    .options label {
+      cursor: pointer;
+      display: block;
+      padding: 12px 16px;
+      border: 2px solid #e2e8f0;
+      border-radius: 8px;
+      transition: all 0.2s;
+      font-size: 15px;
+    }
+    .options label:hover {
+      border-color: #3b82f6;
+      background: #eff6ff;
+    }
+    .options input[type="radio"] {
+      margin-right: 12px;
+      transform: scale(1.2);
+    }
+    .feedback {
+      margin-top: 16px;
+      padding: 16px 20px;
+      border-radius: 8px;
+      font-size: 15px;
+      font-weight: 500;
+    }
+    .feedback.correct {
+      background: #dcfce7;
+      border: 2px solid #22c55e;
+      color: #166534;
+    }
+    .feedback.incorrect {
+      background: #fef2f2;
+      border: 2px solid #ef4444;
+      color: #991b1b;
+    }
+    .stats {
+      font-size: 16px;
+      color: #475569;
+      margin-top: 12px;
+      font-weight: 600;
+      padding: 12px;
+      background: #f1f5f9;
+      border-radius: 8px;
+    }
+  </style>
+</head>
+<body>
+<header>
+  <div>
+    <h1>📚 CB2500 IM Study Guide v6.2</h1>
+    <div class="version">Weeks 2–13 · Exam‑style MCQs · Per‑User Stats on This Device</div>
+  </div>
+</header>
+
+<main>
+  <!-- LEFT: OVERVIEW + EXAM FOCUS -->
+  <section>
+    <div class="card">
+      <h2>📋 Topic Overview</h2>
+      <p class="small">
+        <strong>* = Exam-focused topics</strong> from Week 13 notes. Each bullet gives you exam-answerable content.
+      </p>
+      <ul>
+        <li><span class="topic-name">Week 2 – Business Processes & BPMN</span><span class="star">*</span>
+          <ul>
+            <li>Process = activities turning inputs → outputs for a business goal</li>
+            <li>BPMN symbols: events, activities, gateways, swimlanes (roles), data stores</li>
+            <li>As‑is shows problems → To‑be proposes IS improvements</li>
+          </ul>
+        </li>
+        <li><span class="topic-name">Week 3 – Competitive Strategy & Value Chain</span><span class="star">*</span>
+          <ul>
+            <li>Porter 5 Forces → industry attractiveness analysis</li>
+            <li>4 Generic Strategies → Cost Leadership, Differentiation, Focus variants</li>
+            <li>Value Chain → IS improves Primary + Support activities</li>
+          </ul>
+        </li>
+        <li><span class="topic-name">Week 4 – Hardware, Software & Virtualization</span>
+          <ul><li>Client‑server model, OS vs apps, virtualization benefits</li></ul>
+        </li>
+        <li><span class="topic-name">Week 5 – Data, DB & DBMS</span><span class="star">*</span>
+          <ul><li>Relational model (tables, PK/FK), normalization, CRUD operations</li></ul>
+        </li>
+        <li><span class="topic-name">Week 6 – BI, Big Data, DW & PM</span><span class="star">*</span>
+          <ul><li>BI lifecycle, ETL process, 4Vs Big Data, PM tools</li></ul>
+        </li>
+        <li><span class="topic-name">Week 7 – SMIS & Social Capital</span><span class="star">*</span>
+          <ul><li>SMIS revenue models, social capital benefits/risks</li></ul>
+        </li>
+        <li><span class="topic-name">Week 8 – E‑Commerce & Digital Marketing</span><span class="star">*</span>
+          <ul><li>B2B/B2C/C2C, digital marketing channels</li></ul>
+        </li>
+        <li><span class="topic-name">Week 9 – Information Security & IS Audit</span><span class="star">*</span>
+          <ul><li>CIA triad, threats, controls (tech/org), audit purpose</li></ul>
+        </li>
+        <li><span class="topic-name">Week 10 – Enterprise Systems & ERP</span>
+          <ul><li>ERP integration benefits/risks</li></ul>
+        </li>
+        <li><span class="topic-name">Week 11 – Disruptive Tech & Global IS</span><span class="star">*</span>
+          <ul><li>Disruption characteristics, global IS challenges</li></ul>
+        </li>
+        <li><span class="topic-name">Week 12 – SDLC & Project Management</span><span class="star">*</span>
+          <ul><li>5 SDLC phases, Waterfall vs Agile, project risks</li></ul>
+        </li>
+        <li><span class="topic-name">Week 13 – Exam Strategy & Focus Topics</span><span class="star">*</span>
+          <ul><li>Answer structure, high‑probability topics</li></ul>
+        </li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>🎯 Exam Focus Checklist <span class="star">*</span></h2>
+      <ul>
+        <li>🔥 <strong>BPMN analysis + IS improvements</strong> (Week 2)</li>
+        <li>🔥 <strong>Porter 5 Forces + Generic Strategy application</strong> (Week 3)</li>
+        <li>🔥 <strong>BI/ETL/Data Warehouse/Big Data 4Vs</strong> (Weeks 5–6)</li>
+        <li>🔥 <strong>SMIS benefits/risks + Digital Marketing</strong> (Weeks 7–8)</li>
+        <li>🔥 <strong>CIA Triad + Security Controls + IS Audit</strong> (Week 9)</li>
+        <li>🔥 <strong>Disruptive Tech examples + Global IS challenges</strong> (Week 11)</li>
+        <li>🔥 <strong>SDLC phases + Waterfall vs Agile + Project risks</strong> (Week 12)</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- RIGHT: QUIZ ENGINE -->
+  <section>
+    <div class="card">
+      <h2>⚡ Quiz Center (Per‑User Stats)</h2>
+      <p class="small">
+        1️⃣ Enter username → 2️⃣ Load/Switch user → 3️⃣ Pick topic → 4️⃣ Answer MCQ → 5️⃣ Check Answer → 6️⃣ New Question.  
+        Stats are saved per username on this device.
+      </p>
+      <div class="quiz-controls">
+        <label><strong>Username (separate stats on this device):</strong></label>
+        <input id="usernameInput" type="text" placeholder="e.g. yourname">
+        <button id="loadUserBtn">Load / Switch User</button>
+
+        <label for="topicSelect"><strong>Select Topic:</strong></label>
+        <select id="topicSelect">
+          <option value="all">🎓 Final Exam – All Topics</option>
+          <option value="w2">Week 2 – BPMN* (Exam Focus)</option>
+          <option value="w3">Week 3 – Strategy* (Exam Focus)</option>
+          <option value="w4">Week 4 – Hardware & Virtualization</option>
+          <option value="w5">Week 5 – Databases* (Exam Focus)</option>
+          <option value="w6">Week 6 – BI/Big Data* (Exam Focus)</option>
+          <option value="w7">Week 7 – SMIS* (Exam Focus)</option>
+          <option value="w8">Week 8 – E‑Commerce* (Exam Focus)</option>
+          <option value="w9">Week 9 – Security* (Exam Focus)</option>
+          <option value="w10">Week 10 – ERP</option>
+          <option value="w11">Week 11 – Disruption* (Exam Focus)</option>
+          <option value="w12">Week 12 – SDLC* (Exam Focus)</option>
+          <option value="w13">Week 13 – Exam Strategy* (Exam Focus)</option>
+        </select>
+        <button id="newQuestionBtn">🔄 New Question</button>
+      </div>
+
+      <div id="quizArea" style="margin-top:20px;"></div>
+      <div class="stats" id="statsArea">
+        User: (none) | Questions answered: 0 | Correct: 0 | Accuracy: 0%
+      </div>
+    </div>
+  </section>
+</main>
+
+<script>
+  const questions = [
+    // Week 2 – BPMN*
+    {id:"w2q1",topic:"w2",star:true,
+     question:"In BPMN, which element is BEST used to show who is responsible for an activity?",
+     options:["A swimlane","A start event","A data store","An exclusive gateway"],
+     answer:0,
+     explanation:"Swimlanes group activities by role/department, so they show who is responsible."},
+    {id:"w2q2",topic:"w2",star:true,
+     question:"Current process: customers print→sign→scan→email a form. Which IS-based improvement is MOST appropriate?",
+     options:["Add one more manual approval step",
+              "Use an online form with e-signature and automatic routing",
+              "Ask customers to mail the form by post instead",
+              "Remove all approval steps completely"],
+     answer:1,
+     explanation:"Online e-forms with e-signature remove manual steps, reduce errors and delays, and can route automatically."},
+    {id:"w2q3",topic:"w2",star:true,
+     question:"Why model the 'as-is' process before designing the 'to-be' process?",
+     options:["To make diagrams look complex",
+              "To understand existing problems and constraints before proposing improvements",
+              "To impress management with many BPMN symbols",
+              "To avoid talking to any users"],
+     answer:1,
+     explanation:"As-is modelling shows how work really happens and reveals bottlenecks, so to-be designs can address real issues."},
+    {id:"w2q4",topic:"w2",star:true,
+     question:"In a loan approval BPMN, which element is MOST suitable to represent 'approve or reject'?",
+     options:["A data store","A timer event","An exclusive gateway (XOR)","A start event"],
+     answer:2,
+     explanation:"An exclusive gateway (XOR) models alternative paths, such as approve vs reject."},
+
+    // Week 3 – Strategy & value chain*
+    {id:"w3q1",topic:"w3",star:true,
+     question:"A coffee chain wants to compete with unique drinks and experience, not lowest price. Which generic strategy fits BEST?",
+     options:["Cost leadership","Differentiation","Cost focus","No strategy"],
+     answer:1,
+     explanation:"Differentiation focuses on uniqueness and added value rather than lowest cost."},
+    {id:"w3q2",topic:"w3",star:true,
+     question:"For an online-only retailer, shipping companies increase prices significantly for all firms. Which force is MOST affected?",
+     options:["Threat of new entrants","Bargaining power of buyers","Bargaining power of suppliers","Threat of substitutes"],
+     answer:2,
+     explanation:"Logistics providers gain power when their service becomes more costly and essential, raising supplier power."},
+    {id:"w3q3",topic:"w3",star:true,
+     question:"Which IS example BEST supports a cost leadership strategy in a supermarket?",
+     options:["A system that tracks competitor prices and automatically adjusts own prices",
+              "A mobile app for luxury product customisation",
+              "An expensive store interior design system",
+              "A VR game unrelated to shopping"],
+     answer:0,
+     explanation:"Price-optimisation systems help keep prices competitive and costs low, aligning with cost leadership."},
+    {id:"w3q4",topic:"w3",star:true,
+     question:"Which value chain activity is MOST directly improved by a warehouse inventory management system?",
+     options:["Marketing and sales","Inbound logistics","Firm infrastructure","HR management"],
+     answer:1,
+     explanation:"Inbound logistics covers receiving, storing, and handling inputs. Inventory systems improve this activity."},
+
+    // Week 4 – Hardware & virtualisation
+    {id:"w4q1",topic:"w4",star:false,
+     question:"Which statement about client‑server computing is MOST accurate?",
+     options:["Clients store main databases; servers only show interface",
+              "Servers host shared resources, clients request services",
+              "Clients and servers are always the same machine",
+              "Only servers can run application software"],
+     answer:1,
+     explanation:"Servers provide shared services/data; clients send requests and present results to users."},
+    {id:"w4q2",topic:"w4",star:false,
+     question:"A key benefit of virtualisation is:",
+     options:["Needing more physical servers",
+              "Lower hardware utilisation",
+              "Running many virtual machines on one physical server",
+              "Automatically stopping all cyber attacks"],
+     answer:2,
+     explanation:"Virtualisation allows multiple VMs on one server, improving utilisation and flexibility."},
+
+    // Week 5 – Data & DBMS*
+    {id:"w5q1",topic:"w5",star:true,
+     question:"Table 'Customer'(CustomerID PK, Name, Email) and table 'Order'. Which is a likely FOREIGN KEY in 'Order'?",
+     options:["OrderDate","CustomerID","OrderAmount","Address"],
+     answer:1,
+     explanation:"Order records usually reference CustomerID to link each order to its customer."},
+    {id:"w5q2",topic:"w5",star:true,
+     question:"A highly redundant, poorly normalised database is MOST likely to suffer from:",
+     options:["Faster backups","Update anomalies and inconsistent data",
+              "Better encryption","Guaranteed accuracy"],
+     answer:1,
+     explanation:"Redundancy causes update anomalies when some copies are changed and others are not."},
+    {id:"w5q3",topic:"w5",star:true,
+     question:"Which SQL-like statement retrieves all orders for a given customer?",
+     options:["DELETE FROM Orders",
+              "INSERT INTO Orders",
+              "SELECT * FROM Orders WHERE CustomerID = ?",
+              "GRANT SELECT ON Orders"],
+     answer:2,
+     explanation:"A SELECT with WHERE CustomerID = ? returns only that customer's orders."},
+    {id:"w5q4",topic:"w5",star:true,
+     question:"Which is MOST accurate about a DBMS?",
+     options:["Just a file system","Defines, stores, queries and controls access to data",
+              "Used only for backup","Replaces all business processes"],
+     answer:1,
+     explanation:"DBMS provides data definition, storage, querying and access control."},
+
+    // Week 6 – BI & Big Data*
+    {id:"w6q1",topic:"w6",star:true,
+     question:"A dashboard showing daily sales vs target for each store is BEST described as:",
+     options:["Transaction processing","Business intelligence for monitoring","Social media",
+              "Data encryption"],
+     answer:1,
+     explanation:"Dashboards summarise data for monitoring and decision support – a BI use."},
+    {id:"w6q2",topic:"w6",star:true,
+     question:"Which step is NOT part of ETL for a data warehouse?",
+     options:["Extract from source systems","Transform and clean data",
+              "Load into warehouse","Delete all source data"],
+     answer:3,
+     explanation:"ETL does not require deleting source data; it copies and transforms it."},
+    {id:"w6q3",topic:"w6",star:true,
+     question:"Which situation BEST illustrates 'Velocity' of Big Data?",
+     options:["Old archives only","High-speed sensor streams every second",
+              "Many formats but low speed","Perfectly clean data"],
+     answer:1,
+     explanation:"Velocity is about data arriving fast and needing rapid processing."},
+    {id:"w6q4",topic:"w6",star:true,
+     question:"Project management tools help BI projects by:",
+     options:["Removing need for requirements","Planning tasks, schedule, resources",
+              "Guaranteeing zero risk","Auto-building all dashboards"],
+     answer:1,
+     explanation:"PM tools support planning, scheduling and tracking, key for BI implementations."},
+
+    // Week 7 – SMIS*
+    {id:"w7q1",topic:"w7",star:true,
+     question:"Which action BEST increases social capital via SMIS?",
+     options:["Ignore comments","Engage users and respond helpfully",
+              "Post once per year only","Block all user posts"],
+     answer:1,
+     explanation:"Two-way helpful engagement builds trust and relationships (social capital)."},
+    {id:"w7q2",topic:"w7",star:true,
+     question:"Which SMIS revenue model relies heavily on user data to target ads?",
+     options:["Subscription with no ads","Freemium with no data",
+              "Advertising based on user profiles","One-time licence fee"],
+     answer:2,
+     explanation:"Advertising models often use user data to personalise ads."},
+    {id:"w7q3",topic:"w7",star:true,
+     question:"One major risk of using SMIS for business is:",
+     options:["Customers never post","Loss of control over negative viral content",
+              "Guaranteed higher profit","Automatic security"],
+     answer:1,
+     explanation:"Negative content can spread quickly and is hard to control."},
+
+    // Week 8 – E‑Commerce & digital marketing*
+    {id:"w8q1",topic:"w8",star:true,
+     question:"Which is the BEST example of B2B e‑commerce?",
+     options:["Student buys laptop online",
+              "Manufacturer orders materials from supplier online",
+              "Person sells used items to another person",
+              "Citizen pays tax online"],
+     answer:1,
+     explanation:"B2B is business-to-business, like manufacturer–supplier transactions."},
+    {id:"w8q2",topic:"w8",star:true,
+     question:"Which digital tool is MOST suitable for fast A/B testing of ad messages?",
+     options:["Printed flyers","Search engine marketing (paid search ads)",
+              "Door-to-door selling","Handwritten letters"],
+     answer:1,
+     explanation:"SEM allows quick deployment and testing of different online ad versions."},
+    {id:"w8q3",topic:"w8",star:true,
+     question:"A key benefit of e‑commerce for customers is:",
+     options:["Higher price only","Less product information",
+              "24/7 access with easy comparison of alternatives",
+              "Must visit physical stores"],
+     answer:2,
+     explanation:"E‑commerce offers convenience and easy comparison across many sellers."},
+
+    // Week 9 – Security & audit*
+    {id:"w9q1",topic:"w9",star:true,
+     question:"A virus changes values in a database without detection. Which CIA property is harmed MOST?",
+     options:["Confidentiality","Integrity","Availability","Non-repudiation"],
+     answer:1,
+     explanation:"Integrity is about correctness of data; unauthorised modification damages it."},
+    {id:"w9q2",topic:"w9",star:true,
+     question:"A DDoS attack makes a website unreachable. Which CIA property is harmed MOST?",
+     options:["Confidentiality","Integrity","Availability","Accountability"],
+     answer:2,
+     explanation:"DDoS prevents legitimate users from accessing the service, harming availability."},
+    {id:"w9q3",topic:"w9",star:true,
+     question:"Which is a technical security control?",
+     options:["Security awareness training","Access control policy",
+              "Firewall blocking unauthorised traffic","Job rotation"],
+     answer:2,
+     explanation:"Firewalls are technical devices filtering network traffic."},
+    {id:"w9q4",topic:"w9",star:true,
+     question:"A main purpose of an IS audit is to:",
+     options:["Develop new systems","Guarantee zero risk",
+              "Evaluate if controls are well-designed and operating",
+              "Replace security staff"],
+     answer:2,
+     explanation:"IS audits check whether controls are appropriate and actually used."},
+
+    // Week 10 – ERP
+    {id:"w10q1",topic:"w10",star:false,
+     question:"A major goal of ERP is to:",
+     options:["Increase data silos","Integrate processes and data across functions",
+              "Avoid any organisational change","Make each department isolated"],
+     answer:1,
+     explanation:"ERP integrates multiple functions into a single system, reducing silos."},
+    {id:"w10q2",topic:"w10",star:false,
+     question:"A common risk of ERP projects is:",
+     options:["No training needed","Strong user resistance to standardised processes",
+              "Zero cost","Instant success"],
+     answer:1,
+     explanation:"ERP often forces new standard processes, so users may resist and need change management."},
+
+    // Week 11 – Disruptive tech & global IS*
+    {id:"w11q1",topic:"w11",star:true,
+     question:"Which situation BEST shows a disruptive technology?",
+     options:["Minor packaging change",
+              "Cheap online service gradually replaces traditional travel agencies",
+              "Logo repaint only","Small bug fix"],
+     answer:1,
+     explanation:"Online booking disrupted traditional travel agencies, a typical example of disruption."},
+    {id:"w11q2",topic:"w11",star:true,
+     question:"Which is a key challenge for global IS?",
+     options:["Same laws everywhere","Same language worldwide",
+              "Different laws, cultures, languages, and time zones",
+              "No need for coordination"],
+     answer:2,
+     explanation:"Global IS must handle many legal, cultural and time-zone differences."},
+
+    // Week 12 – SDLC & PM*
+    {id:"w12q1",topic:"w12",star:true,
+     question:"Which is a typical 5‑phase SDLC sequence?",
+     options:["System definition → Requirements → Design → Implementation → Maintenance",
+              "Requirements → System definition → Implementation → Design → Maintenance",
+              "Design → Implementation → Maintenance → System definition → Requirements",
+              "Implementation → Maintenance → Requirements → Design → System definition"],
+     answer:0,
+     explanation:"A standard order is: definition, requirements, design, implementation, maintenance."},
+    {id:"w12q2",topic:"w12",star:true,
+     question:"Which statement about Waterfall vs Agile is MOST correct?",
+     options:["Waterfall loves late requirement changes; Agile does not",
+              "Waterfall assumes stable requirements; Agile uses short iterations and adapts to change",
+              "They handle change identically",
+              "Agile requires full detailed design before coding"],
+     answer:1,
+     explanation:"Waterfall is plan-driven and rigid; Agile is iterative with frequent feedback and adaptation."},
+    {id:"w12q3",topic:"w12",star:true,
+     question:"Scope creep in projects means:",
+     options:["Stable requirements","Uncontrolled growth of requirements",
+              "Project finishing early","Deliberate scope reduction"],
+     answer:1,
+     explanation:"Scope creep is uncontrolled expansion of scope, often causing delay and cost overrun."},
+
+    // Week 13 – Exam strategy*
+    {id:"w13q1",topic:"w13",star:true,
+     question:"For 'How can BI help a retailer?', which structure matches Week 13 advice?",
+     options:[
+       "List random BI tools only",
+       "Definition of BI → key tools/components → apply to retailer case → short conclusion",
+       "Only give examples without definitions",
+       "Describe hardware specs only"
+     ],
+     answer:1,
+     explanation:"Recommended pattern: define, list components/framework, apply to case, then conclude briefly."},
+    {id:"w13q2",topic:"w13",star:true,
+     question:"Why does Week 13 highlight BPMN, strategy, BI, SMIS, security, disruption and SDLC?",
+     options:["They are unimportant","They are high‑probability topics for the final exam",
+              "They will never be examined","They are only for group projects"],
+     answer:1,
+     explanation:"Week 13 identifies them as exam focus areas, so they deserve extra revision."}
+  ];
+
+  let currentUser = null;
+  let stats = { answered: 0, correct: 0 };
+  let currentQuestion = null;
+  let hasAnswered = false;
+
+  function loadStatsForUser(username) {
+    const key = "im_stats_" + username;
+    const saved = localStorage.getItem(key);
+    if (saved) {
+      stats = JSON.parse(saved);
+    } else {
+      stats = { answered: 0, correct: 0 };
+    }
+    updateStats();
+  }
+
+  function saveStatsForUser() {
+    if (!currentUser) return;
+    const key = "im_stats_" + currentUser;
+    localStorage.setItem(key, JSON.stringify(stats));
+  }
+
+  function updateStats() {
+    const acc = stats.answered === 0 ? 0 : Math.round((stats.correct / stats.answered) * 100);
+    document.getElementById('statsArea').textContent =
+      `User: ${currentUser || "(none)"} | Questions answered: ${stats.answered} | Correct: ${stats.correct} | Accuracy: ${acc}%`;
+  }
+
+  function getFilteredQuestions() {
+    const topic = document.getElementById('topicSelect').value;
+    if (topic === 'all') return questions;
+    return questions.filter(q => q.topic === topic);
+  }
+
+  function shuffleArray(arr) {
+    const a = arr.slice();
+    for (let i = a.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [a[i], a[j]] = [a[j], a[i]];
+    }
+    return a;
+  }
+
+  function renderQuestion() {
+    const quizArea = document.getElementById('quizArea');
+    const pool = getFilteredQuestions();
+    if (pool.length === 0) {
+      quizArea.innerHTML = "<p>No questions available for this topic yet.</p>";
+      return;
+    }
+
+    currentQuestion = pool[Math.floor(Math.random() * pool.length)];
+    hasAnswered = false;
+
+    const idxs = shuffleArray(currentQuestion.options.map((_, i) => i));
+    let html = `<div class="question-text">${currentQuestion.question}`;
+    if (currentQuestion.star) html += ` <span class="pill">Exam focus *</span>`;
+    html += `</div><ul class="options">`;
+
+    idxs.forEach((optIdx, i) => {
+      html += `
+        <li>
+          <label>
+            <input type="radio" name="option" value="${optIdx}">
+            (${String.fromCharCode(65 + i)}) ${currentQuestion.options[optIdx]}
+          </label>
+        </li>`;
+    });
+
+    html += `</ul><button id="checkBtn">Check Answer</button>
+             <div id="feedback" class="feedback" style="display:none;"></div>`;
+
+    quizArea.innerHTML = html;
+    document.getElementById('checkBtn').onclick = checkAnswer;
+  }
+
+  function checkAnswer() {
+    if (hasAnswered) return;
+    const selected = document.querySelector('input[name="option"]:checked');
+    const fb = document.getElementById('feedback');
+
+    if (!selected) {
+      fb.style.display = "block";
+      fb.className = "feedback incorrect";
+      fb.textContent = "Please select an option first.";
+      return;
+    }
+
+    hasAnswered = true;
+    stats.answered += 1;
+    const chosen = parseInt(selected.value, 10);
+    const isCorrect = (chosen === currentQuestion.answer);
+
+    if (isCorrect) {
+      stats.correct += 1;
+      fb.className = "feedback correct";
+      fb.textContent = "Correct! " + currentQuestion.explanation;
+    } else {
+      fb.className = "feedback incorrect";
+      const correctText = currentQuestion.options[currentQuestion.answer];
+      fb.textContent =
+        `Not correct. The best answer is: "${correctText}". ` + currentQuestion.explanation;
+    }
+
+    fb.style.display = "block";
+    saveStatsForUser();
+    updateStats();
+  }
+
+  document.getElementById('newQuestionBtn').addEventListener('click', renderQuestion);
+
+  document.getElementById('loadUserBtn').addEventListener('click', () => {
+    const nameInput = document.getElementById('usernameInput').value.trim();
+    if (!nameInput) {
+      alert("Please enter a username.");
+      return;
+    }
+    currentUser = nameInput;
+    loadStatsForUser(currentUser);
+    renderQuestion();
+  });
+
+  // initial state: no user yet
+  currentUser = null;
+  updateStats();
+  renderQuestion();
+</script>
+</body>
+</html>
