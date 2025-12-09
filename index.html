@@ -2,670 +2,887 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>CB2500 IM Study Guide v6.2 – Per‑User Stats</title>
+  <title>CB2500 Long Questions – Keyword Checker (Simple)</title>
   <style>
     body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       margin: 0;
       background: #f8fafc;
-      color: #1e293b;
-      font-size: 15px;
-      line-height: 1.5;
+      color: #0f172a;
     }
     header {
-      background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
-      padding: 20px;
-      color: white;
-      position: sticky;
-      top: 0;
-      z-index: 10;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      background: #2563eb;
+      color: #fff;
+      padding: 14px 18px;
     }
-    h1 { font-size: 24px; margin: 0; }
-    .version { font-size: 14px; opacity: 0.9; }
+    header h1 {
+      margin: 0 0 4px;
+      font-size: 18px;
+    }
+    header p {
+      margin: 0;
+      font-size: 12px;
+      opacity: 0.9;
+    }
     main {
-      display: grid;
-      grid-template-columns: 360px 1fr;
-      gap: 20px;
-      padding: 20px;
-      max-width: 1400px;
-      margin: 0 auto;
+      max-width: 900px;
+      margin: 16px auto 32px;
+      padding: 0 12px;
     }
-    @media (max-width: 900px) {
-      main { grid-template-columns: 1fr; }
+    .controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 12px;
+      align-items: center;
+      font-size: 13px;
     }
-    .card {
-      background: white;
-      border-radius: 12px;
-      padding: 20px;
-      margin-bottom: 20px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    select, button {
+      padding: 6px 10px;
+      font-size: 13px;
+      border-radius: 6px;
+      border: 1px solid #cbd5f5;
+      background: #e5edff;
+      cursor: pointer;
+    }
+    button.primary {
+      background: #2563eb;
+      color: #fff;
+      border-color: #1d4ed8;
+    }
+    button.secondary {
+      background: #f1f5f9;
+      color: #0f172a;
+    }
+    .question-card {
+      background: #fff;
+      border-radius: 8px;
+      padding: 14px 16px;
+      box-shadow: 0 4px 12px rgba(15,23,42,0.06);
+      margin-bottom: 12px;
       border: 1px solid #e2e8f0;
     }
-    h2 {
-      margin-top: 0;
-      color: #1e293b;
-      font-size: 18px;
-      border-bottom: 2px solid #3b82f6;
-      padding-bottom: 8px;
-    }
-    h3 { font-size: 16px; color: #1e293b; }
-    ul { padding-left: 20px; }
-    li { margin: 6px 0; }
-    .topic-name { font-weight: 600; color: #1e293b; }
-    .star { color: #dc2626; font-weight: 700; font-size: 18px; margin-left: 4px; }
-    .small { font-size: 13px; color: #64748b; }
-    .pill {
-      display: inline-block;
-      padding: 4px 12px;
-      border-radius: 20px;
+    .q-meta {
       font-size: 12px;
-      font-weight: 600;
-      background: #fef3c7;
-      color: #92400e;
-      margin-left: 8px;
+      color: #64748b;
+      margin-bottom: 4px;
     }
-    .quiz-controls {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      margin-top: 12px;
-    }
-    select, button, input[type="text"] {
-      padding: 10px 12px;
-      border-radius: 8px;
-      border: 2px solid #e2e8f0;
-      font-size: 14px;
-      font-weight: 500;
-    }
-    select {
-      background: white;
-      color: #1e293b;
-    }
-    button {
-      background: linear-gradient(135deg, #10b981 0%, #059669 100%);
-      color: white;
-      cursor: pointer;
-      font-weight: 600;
-      border: none;
-      transition: all 0.2s;
-    }
-    button:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 4px 12px rgba(16,185,129,0.3);
+    .badge {
+      display: inline-block;
+      padding: 1px 6px;
+      font-size: 10px;
+      border-radius: 999px;
+      background: #fee2e2;
+      color: #b91c1c;
+      margin-left: 4px;
     }
     .question-text {
-      font-weight: 700;
-      font-size: 17px;
-      margin-bottom: 16px;
-      line-height: 1.4;
-      background: #f1f5f9;
-      padding: 16px;
-      border-radius: 8px;
-      border-left: 4px solid #3b82f6;
+      font-weight: 600;
+      margin-bottom: 8px;
+      font-size: 14px;
     }
-    .options {
-      list-style: none;
-      padding-left: 0;
-      margin: 16px 0;
+    textarea {
+      width: 100%;
+      min-height: 140px;
+      resize: vertical;
+      padding: 8px 10px;
+      border-radius: 6px;
+      border: 1px solid #cbd5f5;
+      font-size: 13px;
+      font-family: inherit;
+      background: #f9fafb;
+      box-sizing: border-box;
     }
-    .options li { margin: 12px 0; }
-    .options label {
-      cursor: pointer;
-      display: block;
-      padding: 12px 16px;
-      border: 2px solid #e2e8f0;
-      border-radius: 8px;
-      transition: all 0.2s;
-      font-size: 15px;
-    }
-    .options label:hover {
-      border-color: #3b82f6;
-      background: #eff6ff;
-    }
-    .options input[type="radio"] {
-      margin-right: 12px;
-      transform: scale(1.2);
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 8px;
     }
     .feedback {
-      margin-top: 16px;
-      padding: 16px 20px;
-      border-radius: 8px;
-      font-size: 15px;
-      font-weight: 500;
+      margin-top: 10px;
+      font-size: 13px;
+      background: #eff6ff;
+      border-radius: 6px;
+      padding: 8px 10px;
+      border-left: 3px solid #2563eb;
+      word-break: break-word;
     }
-    .feedback.correct {
-      background: #dcfce7;
-      border: 2px solid #22c55e;
-      color: #166534;
+    details {
+      margin-top: 8px;
+      font-size: 13px;
     }
-    .feedback.incorrect {
-      background: #fef2f2;
-      border: 2px solid #ef4444;
-      color: #991b1b;
+    summary {
+      cursor: pointer;
+      color: #2563eb;
     }
     .stats {
-      font-size: 16px;
+      font-size: 12px;
       color: #475569;
-      margin-top: 12px;
-      font-weight: 600;
-      padding: 12px;
-      background: #f1f5f9;
-      border-radius: 8px;
+      margin-top: 6px;
+    }
+    .footer-note {
+      font-size: 11px;
+      color: #94a3b8;
+      margin-top: 8px;
     }
   </style>
 </head>
 <body>
 <header>
-  <div>
-    <h1>📚 CB2500 IM Study Guide v6.2</h1>
-    <div class="version">Weeks 2–13 · Exam‑style MCQs · Per‑User Stats on This Device</div>
-  </div>
+  <h1>CB2500 Long Questions – Keyword Checker</h1>
+  <p>Type your own answer. Checker uses keywords only (case-insensitive).</p>
 </header>
 
 <main>
-  <!-- LEFT: OVERVIEW + EXAM FOCUS -->
-  <section>
-    <div class="card">
-      <h2>📋 Topic Overview</h2>
-      <p class="small">
-        <strong>* = Exam-focused topics</strong> from Week 13 notes. Each bullet gives you exam-answerable content.
-      </p>
-      <ul>
-        <li><span class="topic-name">Week 2 – Business Processes & BPMN</span><span class="star">*</span>
-          <ul>
-            <li>Process = activities turning inputs → outputs for a business goal</li>
-            <li>BPMN symbols: events, activities, gateways, swimlanes (roles), data stores</li>
-            <li>As‑is shows problems → To‑be proposes IS improvements</li>
-          </ul>
-        </li>
-        <li><span class="topic-name">Week 3 – Competitive Strategy & Value Chain</span><span class="star">*</span>
-          <ul>
-            <li>Porter 5 Forces → industry attractiveness analysis</li>
-            <li>4 Generic Strategies → Cost Leadership, Differentiation, Focus variants</li>
-            <li>Value Chain → IS improves Primary + Support activities</li>
-          </ul>
-        </li>
-        <li><span class="topic-name">Week 4 – Hardware, Software & Virtualization</span>
-          <ul><li>Client‑server model, OS vs apps, virtualization benefits</li></ul>
-        </li>
-        <li><span class="topic-name">Week 5 – Data, DB & DBMS</span><span class="star">*</span>
-          <ul><li>Relational model (tables, PK/FK), normalization, CRUD operations</li></ul>
-        </li>
-        <li><span class="topic-name">Week 6 – BI, Big Data, DW & PM</span><span class="star">*</span>
-          <ul><li>BI lifecycle, ETL process, 4Vs Big Data, PM tools</li></ul>
-        </li>
-        <li><span class="topic-name">Week 7 – SMIS & Social Capital</span><span class="star">*</span>
-          <ul><li>SMIS revenue models, social capital benefits/risks</li></ul>
-        </li>
-        <li><span class="topic-name">Week 8 – E‑Commerce & Digital Marketing</span><span class="star">*</span>
-          <ul><li>B2B/B2C/C2C, digital marketing channels</li></ul>
-        </li>
-        <li><span class="topic-name">Week 9 – Information Security & IS Audit</span><span class="star">*</span>
-          <ul><li>CIA triad, threats, controls (tech/org), audit purpose</li></ul>
-        </li>
-        <li><span class="topic-name">Week 10 – Enterprise Systems & ERP</span>
-          <ul><li>ERP integration benefits/risks</li></ul>
-        </li>
-        <li><span class="topic-name">Week 11 – Disruptive Tech & Global IS</span><span class="star">*</span>
-          <ul><li>Disruption characteristics, global IS challenges</li></ul>
-        </li>
-        <li><span class="topic-name">Week 12 – SDLC & Project Management</span><span class="star">*</span>
-          <ul><li>5 SDLC phases, Waterfall vs Agile, project risks</li></ul>
-        </li>
-        <li><span class="topic-name">Week 13 – Exam Strategy & Focus Topics</span><span class="star">*</span>
-          <ul><li>Answer structure, high‑probability topics</li></ul>
-        </li>
-      </ul>
-    </div>
+  <div class="controls">
+    <span>Topic:</span>
+    <select id="topicSelect">
+      <option value="all">All topics (random)</option>
+      <option value="smart">Smart e‑payments / BI / ETL (Q1–3)</option>
+      <option value="smis">SMIS & Digital marketing (Q4–5)</option>
+      <option value="security">Security, CIA, BCP, Disruptive (Q6–8)</option>
+      <option value="intl">International / Outsourcing / Safeguards / Phishing (Q9–12)</option>
+      <option value="project">Projects, SDLC, challenges, IS audit (Q13–17)</option>
+      <option value="strategy">Strategy & Competition (Q18–20)</option>
+      <option value="digital">Cloud, Taobao, Freemium, AI, SMACIT, Data (Q21–26)</option>
+      <option value="wallet_social">Wallet, Social commerce (Q27–28)</option>
+      <option value="extra">Extra: IT Gov, CRM, Value Chain, IS basics (Q29–32)</option>
+    </select>
+    <button class="secondary" id="newQuestionBtn">New Question</button>
+  </div>
 
-    <div class="card">
-      <h2>🎯 Exam Focus Checklist <span class="star">*</span></h2>
-      <ul>
-        <li>🔥 <strong>BPMN analysis + IS improvements</strong> (Week 2)</li>
-        <li>🔥 <strong>Porter 5 Forces + Generic Strategy application</strong> (Week 3)</li>
-        <li>🔥 <strong>BI/ETL/Data Warehouse/Big Data 4Vs</strong> (Weeks 5–6)</li>
-        <li>🔥 <strong>SMIS benefits/risks + Digital Marketing</strong> (Weeks 7–8)</li>
-        <li>🔥 <strong>CIA Triad + Security Controls + IS Audit</strong> (Week 9)</li>
-        <li>🔥 <strong>Disruptive Tech examples + Global IS challenges</strong> (Week 11)</li>
-        <li>🔥 <strong>SDLC phases + Waterfall vs Agile + Project risks</strong> (Week 12)</li>
-      </ul>
-    </div>
-  </section>
+  <div id="questionContainer" class="question-card"></div>
 
-  <!-- RIGHT: QUIZ ENGINE -->
-  <section>
-    <div class="card">
-      <h2>⚡ Quiz Center (Per‑User Stats)</h2>
-      <p class="small">
-        1️⃣ Enter username → 2️⃣ Load/Switch user → 3️⃣ Pick topic → 4️⃣ Answer MCQ → 5️⃣ Check Answer → 6️⃣ New Question.  
-        Stats are saved per username on this device.
-      </p>
-      <div class="quiz-controls">
-        <label><strong>Username (separate stats on this device):</strong></label>
-        <input id="usernameInput" type="text" placeholder="e.g. yourname">
-        <button id="loadUserBtn">Load / Switch User</button>
+  <div class="stats" id="statsArea">
+    Questions answered: 0 · Avg keyword coverage: 0%
+  </div>
 
-        <label for="topicSelect"><strong>Select Topic:</strong></label>
-        <select id="topicSelect">
-          <option value="all">🎓 Final Exam – All Topics</option>
-          <option value="w2">Week 2 – BPMN* (Exam Focus)</option>
-          <option value="w3">Week 3 – Strategy* (Exam Focus)</option>
-          <option value="w4">Week 4 – Hardware & Virtualization</option>
-          <option value="w5">Week 5 – Databases* (Exam Focus)</option>
-          <option value="w6">Week 6 – BI/Big Data* (Exam Focus)</option>
-          <option value="w7">Week 7 – SMIS* (Exam Focus)</option>
-          <option value="w8">Week 8 – E‑Commerce* (Exam Focus)</option>
-          <option value="w9">Week 9 – Security* (Exam Focus)</option>
-          <option value="w10">Week 10 – ERP</option>
-          <option value="w11">Week 11 – Disruption* (Exam Focus)</option>
-          <option value="w12">Week 12 – SDLC* (Exam Focus)</option>
-          <option value="w13">Week 13 – Exam Strategy* (Exam Focus)</option>
-        </select>
-        <button id="newQuestionBtn">🔄 New Question</button>
-      </div>
-
-      <div id="quizArea" style="margin-top:20px;"></div>
-      <div class="stats" id="statsArea">
-        User: (none) | Questions answered: 0 | Correct: 0 | Accuracy: 0%
-      </div>
-    </div>
-  </section>
+  <p class="footer-note">
+    You can rewrite your answer and press “Check Answer” again. It always re-checks the latest text.
+  </p>
 </main>
 
 <script>
   const questions = [
-    // Week 2 – BPMN*
-    {id:"w2q1",topic:"w2",star:true,
-     question:"In BPMN, which element is BEST used to show who is responsible for an activity?",
-     options:["A swimlane","A start event","A data store","An exclusive gateway"],
-     answer:0,
-     explanation:"Swimlanes group activities by role/department, so they show who is responsible."},
-    {id:"w2q2",topic:"w2",star:true,
-     question:"Current process: customers print→sign→scan→email a form. Which IS-based improvement is MOST appropriate?",
-     options:["Add one more manual approval step",
-              "Use an online form with e-signature and automatic routing",
-              "Ask customers to mail the form by post instead",
-              "Remove all approval steps completely"],
-     answer:1,
-     explanation:"Online e-forms with e-signature remove manual steps, reduce errors and delays, and can route automatically."},
-    {id:"w2q3",topic:"w2",star:true,
-     question:"Why model the 'as-is' process before designing the 'to-be' process?",
-     options:["To make diagrams look complex",
-              "To understand existing problems and constraints before proposing improvements",
-              "To impress management with many BPMN symbols",
-              "To avoid talking to any users"],
-     answer:1,
-     explanation:"As-is modelling shows how work really happens and reveals bottlenecks, so to-be designs can address real issues."},
-    {id:"w2q4",topic:"w2",star:true,
-     question:"In a loan approval BPMN, which element is MOST suitable to represent 'approve or reject'?",
-     options:["A data store","A timer event","An exclusive gateway (XOR)","A start event"],
-     answer:2,
-     explanation:"An exclusive gateway (XOR) models alternative paths, such as approve vs reject."},
-
-    // Week 3 – Strategy & value chain*
-    {id:"w3q1",topic:"w3",star:true,
-     question:"A coffee chain wants to compete with unique drinks and experience, not lowest price. Which generic strategy fits BEST?",
-     options:["Cost leadership","Differentiation","Cost focus","No strategy"],
-     answer:1,
-     explanation:"Differentiation focuses on uniqueness and added value rather than lowest cost."},
-    {id:"w3q2",topic:"w3",star:true,
-     question:"For an online-only retailer, shipping companies increase prices significantly for all firms. Which force is MOST affected?",
-     options:["Threat of new entrants","Bargaining power of buyers","Bargaining power of suppliers","Threat of substitutes"],
-     answer:2,
-     explanation:"Logistics providers gain power when their service becomes more costly and essential, raising supplier power."},
-    {id:"w3q3",topic:"w3",star:true,
-     question:"Which IS example BEST supports a cost leadership strategy in a supermarket?",
-     options:["A system that tracks competitor prices and automatically adjusts own prices",
-              "A mobile app for luxury product customisation",
-              "An expensive store interior design system",
-              "A VR game unrelated to shopping"],
-     answer:0,
-     explanation:"Price-optimisation systems help keep prices competitive and costs low, aligning with cost leadership."},
-    {id:"w3q4",topic:"w3",star:true,
-     question:"Which value chain activity is MOST directly improved by a warehouse inventory management system?",
-     options:["Marketing and sales","Inbound logistics","Firm infrastructure","HR management"],
-     answer:1,
-     explanation:"Inbound logistics covers receiving, storing, and handling inputs. Inventory systems improve this activity."},
-
-    // Week 4 – Hardware & virtualisation
-    {id:"w4q1",topic:"w4",star:false,
-     question:"Which statement about client‑server computing is MOST accurate?",
-     options:["Clients store main databases; servers only show interface",
-              "Servers host shared resources, clients request services",
-              "Clients and servers are always the same machine",
-              "Only servers can run application software"],
-     answer:1,
-     explanation:"Servers provide shared services/data; clients send requests and present results to users."},
-    {id:"w4q2",topic:"w4",star:false,
-     question:"A key benefit of virtualisation is:",
-     options:["Needing more physical servers",
-              "Lower hardware utilisation",
-              "Running many virtual machines on one physical server",
-              "Automatically stopping all cyber attacks"],
-     answer:2,
-     explanation:"Virtualisation allows multiple VMs on one server, improving utilisation and flexibility."},
-
-    // Week 5 – Data & DBMS*
-    {id:"w5q1",topic:"w5",star:true,
-     question:"Table 'Customer'(CustomerID PK, Name, Email) and table 'Order'. Which is a likely FOREIGN KEY in 'Order'?",
-     options:["OrderDate","CustomerID","OrderAmount","Address"],
-     answer:1,
-     explanation:"Order records usually reference CustomerID to link each order to its customer."},
-    {id:"w5q2",topic:"w5",star:true,
-     question:"A highly redundant, poorly normalised database is MOST likely to suffer from:",
-     options:["Faster backups","Update anomalies and inconsistent data",
-              "Better encryption","Guaranteed accuracy"],
-     answer:1,
-     explanation:"Redundancy causes update anomalies when some copies are changed and others are not."},
-    {id:"w5q3",topic:"w5",star:true,
-     question:"Which SQL-like statement retrieves all orders for a given customer?",
-     options:["DELETE FROM Orders",
-              "INSERT INTO Orders",
-              "SELECT * FROM Orders WHERE CustomerID = ?",
-              "GRANT SELECT ON Orders"],
-     answer:2,
-     explanation:"A SELECT with WHERE CustomerID = ? returns only that customer's orders."},
-    {id:"w5q4",topic:"w5",star:true,
-     question:"Which is MOST accurate about a DBMS?",
-     options:["Just a file system","Defines, stores, queries and controls access to data",
-              "Used only for backup","Replaces all business processes"],
-     answer:1,
-     explanation:"DBMS provides data definition, storage, querying and access control."},
-
-    // Week 6 – BI & Big Data*
-    {id:"w6q1",topic:"w6",star:true,
-     question:"A dashboard showing daily sales vs target for each store is BEST described as:",
-     options:["Transaction processing","Business intelligence for monitoring","Social media",
-              "Data encryption"],
-     answer:1,
-     explanation:"Dashboards summarise data for monitoring and decision support – a BI use."},
-    {id:"w6q2",topic:"w6",star:true,
-     question:"Which step is NOT part of ETL for a data warehouse?",
-     options:["Extract from source systems","Transform and clean data",
-              "Load into warehouse","Delete all source data"],
-     answer:3,
-     explanation:"ETL does not require deleting source data; it copies and transforms it."},
-    {id:"w6q3",topic:"w6",star:true,
-     question:"Which situation BEST illustrates 'Velocity' of Big Data?",
-     options:["Old archives only","High-speed sensor streams every second",
-              "Many formats but low speed","Perfectly clean data"],
-     answer:1,
-     explanation:"Velocity is about data arriving fast and needing rapid processing."},
-    {id:"w6q4",topic:"w6",star:true,
-     question:"Project management tools help BI projects by:",
-     options:["Removing need for requirements","Planning tasks, schedule, resources",
-              "Guaranteeing zero risk","Auto-building all dashboards"],
-     answer:1,
-     explanation:"PM tools support planning, scheduling and tracking, key for BI implementations."},
-
-    // Week 7 – SMIS*
-    {id:"w7q1",topic:"w7",star:true,
-     question:"Which action BEST increases social capital via SMIS?",
-     options:["Ignore comments","Engage users and respond helpfully",
-              "Post once per year only","Block all user posts"],
-     answer:1,
-     explanation:"Two-way helpful engagement builds trust and relationships (social capital)."},
-    {id:"w7q2",topic:"w7",star:true,
-     question:"Which SMIS revenue model relies heavily on user data to target ads?",
-     options:["Subscription with no ads","Freemium with no data",
-              "Advertising based on user profiles","One-time licence fee"],
-     answer:2,
-     explanation:"Advertising models often use user data to personalise ads."},
-    {id:"w7q3",topic:"w7",star:true,
-     question:"One major risk of using SMIS for business is:",
-     options:["Customers never post","Loss of control over negative viral content",
-              "Guaranteed higher profit","Automatic security"],
-     answer:1,
-     explanation:"Negative content can spread quickly and is hard to control."},
-
-    // Week 8 – E‑Commerce & digital marketing*
-    {id:"w8q1",topic:"w8",star:true,
-     question:"Which is the BEST example of B2B e‑commerce?",
-     options:["Student buys laptop online",
-              "Manufacturer orders materials from supplier online",
-              "Person sells used items to another person",
-              "Citizen pays tax online"],
-     answer:1,
-     explanation:"B2B is business-to-business, like manufacturer–supplier transactions."},
-    {id:"w8q2",topic:"w8",star:true,
-     question:"Which digital tool is MOST suitable for fast A/B testing of ad messages?",
-     options:["Printed flyers","Search engine marketing (paid search ads)",
-              "Door-to-door selling","Handwritten letters"],
-     answer:1,
-     explanation:"SEM allows quick deployment and testing of different online ad versions."},
-    {id:"w8q3",topic:"w8",star:true,
-     question:"A key benefit of e‑commerce for customers is:",
-     options:["Higher price only","Less product information",
-              "24/7 access with easy comparison of alternatives",
-              "Must visit physical stores"],
-     answer:2,
-     explanation:"E‑commerce offers convenience and easy comparison across many sellers."},
-
-    // Week 9 – Security & audit*
-    {id:"w9q1",topic:"w9",star:true,
-     question:"A virus changes values in a database without detection. Which CIA property is harmed MOST?",
-     options:["Confidentiality","Integrity","Availability","Non-repudiation"],
-     answer:1,
-     explanation:"Integrity is about correctness of data; unauthorised modification damages it."},
-    {id:"w9q2",topic:"w9",star:true,
-     question:"A DDoS attack makes a website unreachable. Which CIA property is harmed MOST?",
-     options:["Confidentiality","Integrity","Availability","Accountability"],
-     answer:2,
-     explanation:"DDoS prevents legitimate users from accessing the service, harming availability."},
-    {id:"w9q3",topic:"w9",star:true,
-     question:"Which is a technical security control?",
-     options:["Security awareness training","Access control policy",
-              "Firewall blocking unauthorised traffic","Job rotation"],
-     answer:2,
-     explanation:"Firewalls are technical devices filtering network traffic."},
-    {id:"w9q4",topic:"w9",star:true,
-     question:"A main purpose of an IS audit is to:",
-     options:["Develop new systems","Guarantee zero risk",
-              "Evaluate if controls are well-designed and operating",
-              "Replace security staff"],
-     answer:2,
-     explanation:"IS audits check whether controls are appropriate and actually used."},
-
-    // Week 10 – ERP
-    {id:"w10q1",topic:"w10",star:false,
-     question:"A major goal of ERP is to:",
-     options:["Increase data silos","Integrate processes and data across functions",
-              "Avoid any organisational change","Make each department isolated"],
-     answer:1,
-     explanation:"ERP integrates multiple functions into a single system, reducing silos."},
-    {id:"w10q2",topic:"w10",star:false,
-     question:"A common risk of ERP projects is:",
-     options:["No training needed","Strong user resistance to standardised processes",
-              "Zero cost","Instant success"],
-     answer:1,
-     explanation:"ERP often forces new standard processes, so users may resist and need change management."},
-
-    // Week 11 – Disruptive tech & global IS*
-    {id:"w11q1",topic:"w11",star:true,
-     question:"Which situation BEST shows a disruptive technology?",
-     options:["Minor packaging change",
-              "Cheap online service gradually replaces traditional travel agencies",
-              "Logo repaint only","Small bug fix"],
-     answer:1,
-     explanation:"Online booking disrupted traditional travel agencies, a typical example of disruption."},
-    {id:"w11q2",topic:"w11",star:true,
-     question:"Which is a key challenge for global IS?",
-     options:["Same laws everywhere","Same language worldwide",
-              "Different laws, cultures, languages, and time zones",
-              "No need for coordination"],
-     answer:2,
-     explanation:"Global IS must handle many legal, cultural and time-zone differences."},
-
-    // Week 12 – SDLC & PM*
-    {id:"w12q1",topic:"w12",star:true,
-     question:"Which is a typical 5‑phase SDLC sequence?",
-     options:["System definition → Requirements → Design → Implementation → Maintenance",
-              "Requirements → System definition → Implementation → Design → Maintenance",
-              "Design → Implementation → Maintenance → System definition → Requirements",
-              "Implementation → Maintenance → Requirements → Design → System definition"],
-     answer:0,
-     explanation:"A standard order is: definition, requirements, design, implementation, maintenance."},
-    {id:"w12q2",topic:"w12",star:true,
-     question:"Which statement about Waterfall vs Agile is MOST correct?",
-     options:["Waterfall loves late requirement changes; Agile does not",
-              "Waterfall assumes stable requirements; Agile uses short iterations and adapts to change",
-              "They handle change identically",
-              "Agile requires full detailed design before coding"],
-     answer:1,
-     explanation:"Waterfall is plan-driven and rigid; Agile is iterative with frequent feedback and adaptation."},
-    {id:"w12q3",topic:"w12",star:true,
-     question:"Scope creep in projects means:",
-     options:["Stable requirements","Uncontrolled growth of requirements",
-              "Project finishing early","Deliberate scope reduction"],
-     answer:1,
-     explanation:"Scope creep is uncontrolled expansion of scope, often causing delay and cost overrun."},
-
-    // Week 13 – Exam strategy*
-    {id:"w13q1",topic:"w13",star:true,
-     question:"For 'How can BI help a retailer?', which structure matches Week 13 advice?",
-     options:[
-       "List random BI tools only",
-       "Definition of BI → key tools/components → apply to retailer case → short conclusion",
-       "Only give examples without definitions",
-       "Describe hardware specs only"
-     ],
-     answer:1,
-     explanation:"Recommended pattern: define, list components/framework, apply to case, then conclude briefly."},
-    {id:"w13q2",topic:"w13",star:true,
-     question:"Why does Week 13 highlight BPMN, strategy, BI, SMIS, security, disruption and SDLC?",
-     options:["They are unimportant","They are high‑probability topics for the final exam",
-              "They will never be examined","They are only for group projects"],
-     answer:1,
-     explanation:"Week 13 identifies them as exam focus areas, so they deserve extra revision."}
+    {
+      id: 1,
+      topic: "smart",
+      code: "Q1 – Smart e‑payments ★",
+      marks: 5,
+      text: "Explain TWO benefits and TWO risks of smart e‑payments for consumers, using examples.",
+      suggested: [
+        "Benefits: convenience and speed (pay anytime/anywhere, no cash)",
+        "Benefits: easy record keeping (transaction history in app)",
+        "Benefits: promotions and rewards (discounts, points, coupons)",
+        "Risks: security (hacking, stolen phone/account)",
+        "Risks: privacy (spending data tracked and analysed)",
+        "Risks: system / network failure (cannot pay if app/server down)"
+      ],
+      fullAnswer: "Benefit 1: Convenience and speed. Smart e‑payments let consumers pay anytime and anywhere without carrying cash. Benefit 2: Easy record‑keeping. Every payment is recorded in the app so users can easily check their transaction history and spending. Risk 1: Security risk. If the phone or account is hacked or stolen, the user’s money or data can be lost. Risk 2: Privacy and system failure risk. Spending data may be tracked and analysed, and if the app, system or network fails, users may not be able to pay.",
+      keywords: [
+        "convenience", "speed", "anytime", "anywhere", "no cash",
+        "record", "transaction history",
+        "promotion", "reward", "discount", "points", "coupons",
+        "security", "hacking", "stolen", "phone", "account",
+        "privacy", "tracking", "analysed",
+        "system failure", "network failure", "server down", "cannot pay"
+      ]
+    },
+    {
+      id: 2,
+      topic: "smart",
+      code: "Q2 – BI & Big Data – smart banking ★",
+      marks: 5,
+      text: "Explain how BI and Big Data can support smart banking. Give TWO specific applications.",
+      suggested: [
+        "Use Big Data and BI to analyse large volumes of customer and transaction data",
+        "Fraud detection – detect unusual transaction patterns",
+        "Credit scoring – assess loan risk using many data sources",
+        "Personalised offers – recommend products based on behaviour",
+        "Customer segmentation – group customers by needs and value"
+      ],
+      fullAnswer: "Use: Big Data and Business Intelligence. Banks analyse large volumes of customer and transaction data to support smarter decisions. Application 1: Fraud detection. Systems detect unusual or suspicious transaction patterns and help block fraud. Application 2: Credit scoring and personalised offers. Banks assess loan risk using many data sources and provide personalised product offers and customer segmentation based on customer behaviour and value.",
+      keywords: [
+        "big data", "business intelligence", "BI",
+        "customer data", "transaction data", "analyse",
+        "fraud detection", "unusual", "suspicious pattern",
+        "credit scoring", "loan risk",
+        "personalised", "recommendation", "product offer",
+        "customer segmentation", "segment", "needs", "value"
+      ]
+    },
+    {
+      id: 3,
+      topic: "smart",
+      code: "Q3 – ETL process ★",
+      marks: 5,
+      text: "Describe the ETL process in building a data warehouse and explain why each step is important.",
+      suggested: [
+        "Extract: get data from multiple source systems (collect all needed data)",
+        "Transform: clean, integrate, standardise, reformat (ensure consistent, accurate, usable data)",
+        "Load: move transformed data into data warehouse (make data available for BI/analysis)"
+      ],
+      fullAnswer: "E refers to Extract. This means getting data from multiple source systems so that all required data is collected. T refers to Transform. This means cleaning, integrating and standardising the data so that it becomes consistent, accurate and usable for analysis. L refers to Load. This means loading the transformed data into the data warehouse so that it is available for business intelligence and reporting.",
+      keywords: [
+        "extract", "source systems", "collect data",
+        "transform", "clean", "integrate", "standardise", "reformat",
+        "consistent", "accurate", "usable",
+        "load", "data warehouse", "available", "analysis", "BI"
+      ]
+    },
+    {
+      id: 4,
+      topic: "smis",
+      code: "Q4 – SMIS revenue models",
+      marks: 4,
+      text: "Describe TWO revenue models used by SMIS platforms and explain how they generate income.",
+      suggested: [
+        "Advertising: show ads to users; charge advertisers (impressions, clicks, conversions)",
+        "Subscription/premium: users pay for extra features or no ads",
+        "Transaction/commission: platform takes fee per transaction (marketplace)",
+        "Data/analytics services: sell insights/targeting to advertisers"
+      ],
+      fullAnswer: "Model 1: Advertising. The platform shows ads to users and charges advertisers based on impressions, clicks or conversions. Model 2: Subscription or premium. Users pay a regular fee for extra features or an ad‑free experience. Other models include transaction or commission fees on each deal in a marketplace and data or analytics services where the platform sells insights or targeting to advertisers.",
+      keywords: [
+        "advertising", "ads", "impressions", "clicks", "conversions",
+        "subscription", "premium", "pay", "no ads",
+        "transaction", "commission", "fee", "per transaction",
+        "data service", "analytics", "insights", "targeting"
+      ]
+    },
+    {
+      id: 5,
+      topic: "smis",
+      code: "Q5 – Digital vs traditional marketing ★",
+      marks: 5,
+      text: "Why is digital marketing considered more “measurable” and “adjustable” than traditional media like TV and print?",
+      suggested: [
+        "Measurable: track views, clicks, conversions, time spent, etc.; real‑time detailed statistics",
+        "Adjustable: quickly change content, budget, targeting; A/B testing and optimisation",
+        "Traditional media: hard to measure exact response; slow and costly to adjust"
+      ],
+      fullAnswer: "Reason 1: Measurable. Digital marketing can track views, clicks, conversions and time spent, giving real‑time detailed statistics for each campaign. Reason 2: Adjustable. Marketers can quickly change content, budget and targeting and use A/B testing for continuous optimisation. In contrast, traditional media like TV and print are hard to measure exactly and are slow and costly to adjust once campaigns are launched.",
+      keywords: [
+        "track", "views", "clicks", "conversions", "time spent",
+        "real time", "statistics", "analytics",
+        "adjust", "change content", "change budget", "change targeting",
+        "A/B testing", "optimisation",
+        "traditional", "tv", "print", "hard to measure", "slow", "costly to change"
+      ]
+    },
+    {
+      id: 6,
+      topic: "security",
+      code: "Q6 – CIA: threat + control ★",
+      marks: 6,
+      text: "For each component of the CIA model, give ONE example of a threat and ONE control to reduce that threat.",
+      suggested: [
+        "Confidentiality: unauthorised access/data leak → encryption, access control, strong passwords",
+        "Integrity: data tampering/unauthorised modification → checksums, input validation, access control",
+        "Availability: DDoS, hardware failure, power outage → backups, redundancy, UPS, disaster recovery plan"
+      ],
+      fullAnswer: "Confidentiality: Threat – unauthorised access or data leak. Control – use encryption, strong passwords and access control to protect sensitive data. Integrity: Threat – data tampering or unauthorised modification. Control – use checksums, input validation and proper access control to detect and prevent changes. Availability: Threat – DDoS attack, hardware failure or power outage. Control – use backups, redundancy, UPS and a disaster recovery plan to keep systems available.",
+      keywords: [
+        "confidentiality", "unauthorised access", "data leak", "encryption", "access control", "password",
+        "integrity", "tampering", "modification", "checksum", "input validation",
+        "availability", "ddos", "denial of service", "hardware failure", "power outage",
+        "backup", "redundancy", "UPS", "disaster recovery"
+      ]
+    },
+    {
+      id: 7,
+      topic: "security",
+      code: "Q7 – Business Continuity Plan (BCP) ★",
+      marks: 4,
+      text: "Explain the purpose of a Business Continuity Plan (BCP) and why regular testing of the plan is necessary.",
+      suggested: [
+        "Purpose: ensure critical operations can continue or recover quickly after disruption; minimise downtime, financial loss, reputational damage",
+        "Testing: check if BCP works in practice; identify gaps/weaknesses and update plan; train staff and improve readiness"
+      ],
+      fullAnswer: "Purpose: Business Continuity Plan. A BCP aims to ensure that critical operations can continue or recover quickly after a disruption, minimising downtime, financial loss and reputational damage. Reason for testing: Regular testing checks whether the BCP works in practice, identifies gaps and weaknesses so the plan can be updated, and trains staff so they are prepared in a real incident.",
+      keywords: [
+        "continue operations", "recover quickly", "disruption",
+        "minimise downtime", "financial loss", "reputational damage",
+        "testing", "exercise", "gaps", "weaknesses", "update plan",
+        "train staff", "readiness"
+      ]
+    },
+    {
+      id: 8,
+      topic: "security",
+      code: "Q8 – Disruptive technology ★",
+      marks: 5,
+      text: "What is disruptive technology? Use ONE example to explain how it can threaten existing firms.",
+      suggested: [
+        "New technology that changes industry rules; often starts low‑end/niche then overtakes",
+        "Example: streaming vs DVD rental/TV; ride‑hailing vs taxis; smartphones vs feature phones",
+        "Threat: existing firms lose customers/revenue if they fail to adapt; traditional model less attractive"
+      ],
+      fullAnswer: "Definition: Disruptive technology. It is a new technology that changes industry rules, often starting in a low‑end or niche market and then overtaking existing solutions. Example: Streaming. Online streaming services disrupted DVD rental and traditional TV because customers switched to cheaper, more convenient on‑demand content. Threat: Existing firms lose customers and revenue if they fail to adapt, and their traditional business model becomes less attractive.",
+      keywords: [
+        "disruptive", "change industry", "low end", "niche",
+        "overtake", "existing solutions",
+        "streaming", "dvd rental", "ride hailing", "taxis", "smartphone", "feature phone",
+        "lose customers", "lose revenue", "fail to adapt", "traditional business model"
+      ]
+    },
+    {
+      id: 9,
+      topic: "intl",
+      code: "Q9 – International MIS challenges",
+      marks: 4,
+      text: "Identify TWO challenges of implementing an international information system and suggest ONE solution for each.",
+      suggested: [
+        "Cultural/language differences → localisation, local language support, training",
+        "Legal/regulatory differences → follow local laws, adapt policies, consult legal experts",
+        "Other: time zones, network quality, infrastructure → regional data centres, standard procedures, local support"
+      ],
+      fullAnswer: "Challenge 1: Cultural and language differences. Solution – use localisation, local language support and user training so the system fits local users. Challenge 2: Legal and regulatory differences such as data protection or tax rules. Solution – comply with local laws, adapt company policies and consult legal experts. Other challenges like time zones and network quality can be handled with regional data centres, standard procedures and local support.",
+      keywords: [
+        "culture", "language", "localisation", "local language",
+        "legal", "regulation", "data protection", "tax", "local law",
+        "time zone", "network quality", "infrastructure",
+        "regional data centre", "standard procedure", "local support", "training"
+      ]
+    },
+    {
+      id: 10,
+      topic: "intl",
+      code: "Q10 – Outsourcing IT: benefit and risk",
+      marks: 4,
+      text: "Explain ONE benefit and ONE risk of outsourcing IT services for an organisation.",
+      suggested: [
+        "Benefit: cost savings; access to specialised expertise; focus on core business",
+        "Risk: loss of control over IT operations; dependence on vendor; security/confidentiality issues"
+      ],
+      fullAnswer: "Benefit: Cost savings and expertise. Outsourcing IT allows a firm to avoid building a full in‑house team, reduce costs and access specialised expertise while focusing on its core business. Risk: Loss of control and dependence. The organisation may lose control over IT operations, become dependent on the vendor and face security or confidentiality risks if the provider mishandles data.",
+      keywords: [
+        "cost saving", "reduce cost", "in house", "specialised expertise",
+        "focus on core business",
+        "loss of control", "outsourcer", "vendor", "dependence",
+        "security", "confidentiality"
+      ]
+    },
+    {
+      id: 11,
+      topic: "intl",
+      code: "Q11 – Technical, data, human safeguards ★",
+      marks: 4,
+      text: "Explain the difference between technical, data, and human safeguards, giving ONE example for each.",
+      suggested: [
+        "Technical safeguards: firewalls, encryption, antivirus, technical access control",
+        "Data safeguards: backups, database access rights, data classification",
+        "Human safeguards: security training, policies, awareness, separation of duties"
+      ],
+      fullAnswer: "Type 1: Technical safeguards. These use technology to protect systems and networks, for example firewalls, encryption, antivirus software and technical access control. Type 2: Data safeguards. These protect data using policies and procedures, such as backups, database access rights and data classification. Type 3: Human safeguards. These focus on people and behaviour, including security awareness training, clear policies and separation of duties.",
+      keywords: [
+        "technical safeguard", "firewall", "encryption", "antivirus", "access control",
+        "data safeguard", "backup", "database access", "data classification",
+        "human safeguard", "training", "security policy", "awareness", "separation of duties"
+      ]
+    },
+    {
+      id: 12,
+      topic: "intl",
+      code: "Q12 – Phishing & safeguards ★",
+      marks: 4,
+      text: "What is phishing? Explain ONE technical safeguard and ONE human safeguard that can help reduce phishing attacks.",
+      suggested: [
+        "Phishing: fraudulent attempt to obtain sensitive info by pretending to be trusted (fake emails/sites/messages)",
+        "Technical: email filters/anti‑spam, browser warnings, multi‑factor authentication",
+        "Human: user awareness training; verify sender/links; don’t click unknown links; report suspicious emails"
+      ],
+      fullAnswer: "Definition: Phishing. It is a fraudulent attempt to obtain sensitive information by pretending to be a trusted person or organisation using fake emails, websites or messages. Technical safeguard: Use email filters and anti‑spam systems, browser warnings and multi‑factor authentication to block or reduce phishing. Human safeguard: Provide user awareness training so people verify senders and links, avoid clicking unknown links and report suspicious emails.",
+      keywords: [
+        "phishing", "fraudulent", "fake email", "fake website", "sensitive information",
+        "email filter", "anti spam", "browser warning", "multi factor authentication",
+        "user awareness", "training", "verify sender", "unknown link", "report"
+      ]
+    },
+    {
+      id: 13,
+      topic: "project",
+      code: "Q13 – Project vs operation",
+      marks: 4,
+      text: "Explain TWO differences between a project and an operation, with examples.",
+      suggested: [
+        "Project: temporary, defined start and end; unique output; example: developing a new app",
+        "Operation: ongoing, repetitive, no fixed end; same outputs repeatedly; example: daily transaction processing"
+      ],
+      fullAnswer: "Difference 1: Time and uniqueness. A project is temporary with a defined start and end and produces a unique output, for example developing a new app. Difference 2: Continuity and repetition. An operation is ongoing and repetitive with no fixed end, producing the same outputs repeatedly, for example daily transaction processing in a bank.",
+      keywords: [
+        "project", "temporary", "start", "end", "unique output",
+        "operation", "ongoing", "repetitive", "no fixed end", "routine work",
+        "example", "new app", "daily transaction processing"
+      ]
+    },
+    {
+      id: 14,
+      topic: "project",
+      code: "Q14 – Project management process groups ★",
+      marks: 5,
+      text: "Briefly describe the five project management process groups and state the main purpose of each.",
+      suggested: [
+        "Initiation: define objectives/scope, get approval",
+        "Planning: detailed plans (scope, schedule, budget, risk, resources)",
+        "Execution: perform project work",
+        "Monitoring & controlling: track progress vs plan, correct deviations",
+        "Closing: finish, hand over deliverables, lessons learned"
+      ],
+      fullAnswer: "Group 1: Initiation. Define objectives and scope and obtain approval to start the project. Group 2: Planning. Create detailed plans for scope, schedule, budget, risks and resources. Group 3: Execution. Perform the actual project work to produce the deliverables. Group 4: Monitoring and controlling. Track progress against the plan and correct deviations. Group 5: Closing. Formally finish the project, hand over deliverables and capture lessons learned.",
+      keywords: [
+        "initiation", "objective", "scope", "approval",
+        "planning", "schedule", "budget", "risk", "resources",
+        "execution", "do work",
+        "monitoring", "controlling", "track progress", "correct deviations",
+        "closing", "handover", "deliverables", "lessons learned"
+      ]
+    },
+    {
+      id: 15,
+      topic: "project",
+      code: "Q15 – SDLC phases ★",
+      marks: 5,
+      text: "Describe the main phases of the Systems Development Life Cycle (SDLC) and briefly explain the purpose of each phase.",
+      suggested: [
+        "Planning/feasibility: decide whether project should start",
+        "Analysis: study current system, gather and define requirements",
+        "Design: design architecture, database, interfaces, processes",
+        "Implementation: program/configure, test, and install the system",
+        "Maintenance/operation: run the system, fix bugs, enhancements"
+      ],
+      fullAnswer: "Phase 1: Planning and feasibility. Decide whether the project should start and perform a feasibility study. Phase 2: Analysis. Study the current system and gather and define detailed requirements. Phase 3: Design. Design the system architecture, database, interfaces and processes to meet the requirements. Phase 4: Implementation. Program or configure the system, test it and install it for users. Phase 5: Maintenance and operation. Run the system in production, fix bugs and make enhancements.",
+      keywords: [
+        "planning", "feasibility",
+        "analysis", "requirements",
+        "design", "architecture", "database", "interface",
+        "implementation", "coding", "testing", "installation",
+        "maintenance", "operation", "fix bugs", "enhancement"
+      ]
+    },
+    {
+      id: 16,
+      topic: "project",
+      code: "Q16 – Challenges in system development",
+      marks: 6,
+      text: "Identify THREE challenges in developing new information systems and explain why each can cause project failure.",
+      suggested: [
+        "Changing/unclear requirements → scope creep, rework, time/cost overruns",
+        "Lack of user involvement → system doesn’t meet needs, low acceptance",
+        "Poor project management/unrealistic schedule → delays, cost overruns, low quality",
+        "Other: technical complexity, lack of skills, poor communication"
+      ],
+      fullAnswer: "Challenge 1: Changing or unclear requirements. This can cause scope creep, rework and time and cost overruns, leading to project failure. Challenge 2: Lack of user involvement. If users are not involved, the system may not meet their needs and will have low acceptance. Challenge 3: Poor project management or unrealistic schedule. This leads to delays, cost overruns and low quality. Other issues such as technical complexity, lack of skills and poor communication can also contribute to failure.",
+      keywords: [
+        "changing requirements", "unclear requirements", "scope creep", "rework",
+        "lack of user involvement", "user participation", "low acceptance",
+        "poor project management", "unrealistic schedule", "delay", "cost overrun", "low quality",
+        "technical complexity", "lack of skills", "poor communication"
+      ]
+    },
+    {
+      id: 17,
+      topic: "project",
+      code: "Q17 – IS audit & BCP",
+      marks: 4,
+      text: "Explain the role of an IS auditor in evaluating a Business Continuity Plan (BCP), giving TWO key areas they should check.",
+      suggested: [
+        "Role: assess if BCP can maintain/recover critical operations after disruption",
+        "Check areas: completeness of BCP; recovery procedures and priorities; backup/recovery; testing/updating"
+      ],
+      fullAnswer: "Role: IS auditor. The IS auditor evaluates whether the Business Continuity Plan can maintain or recover critical operations after a disruption. Area 1: Completeness and recovery procedures. They check if the BCP covers key systems, locations and people, and has clear recovery procedures and priorities. Area 2: Backup, testing and updating. They check backup and recovery arrangements for data and systems and verify that the plan is regularly tested and updated.",
+      keywords: [
+        "IS auditor", "evaluate BCP", "maintain operations", "recover operations",
+        "completeness", "systems", "locations", "people",
+        "recovery procedures", "priorities",
+        "backup", "recovery", "testing", "updating"
+      ]
+    },
+    {
+      id: 18,
+      topic: "strategy",
+      code: "Q18 – Competitive advantage & value chain ★",
+      marks: 5,
+      text: "Explain what is meant by competitive advantage and show how the value chain model can help a firm build or analyse competitive advantage.",
+      suggested: [
+        "Competitive advantage: doing better than rivals (cost, differentiation, focus) → higher profit/market share",
+        "Value chain: split firm into primary + support activities",
+        "Analyse where to add value or reduce cost",
+        "Identify activities where IS can improve efficiency or differentiation"
+      ],
+      fullAnswer: "Definition: Competitive advantage. It means doing better than rivals through cost leadership, differentiation or focus so the firm gains higher profit or market share. Tool: Value chain model. It splits the firm into primary and support activities so managers can analyse where to add value or reduce cost. Use: By examining each activity, the firm can identify where information systems can improve efficiency or differentiation and build or strengthen competitive advantage.",
+      keywords: [
+        "competitive advantage", "better than rivals", "profit", "market share",
+        "value chain", "primary activities", "support activities",
+        "add value", "reduce cost",
+        "information systems", "efficiency", "differentiation"
+      ]
+    },
+    {
+      id: 19,
+      topic: "strategy",
+      code: "Q19 – Porter’s five forces (application) ★",
+      marks: 4,
+      text: "Choose an industry and briefly explain how TWO of Porter’s five forces affect profitability in that industry.",
+      suggested: [
+        "Example: online retail; Threat of new entrants → more competition, lower prices/profitability",
+        "Bargaining power of buyers → easy comparison and switching, pressure on margins"
+      ],
+      fullAnswer: "Example: Online retail. Force 1: Threat of new entrants. If it is easy to set up an online store, many new competitors enter, which increases competition, lowers prices and reduces profitability. Force 2: Bargaining power of buyers. Customers can compare prices easily and switch quickly between online retailers, which puts pressure on margins. Other forces such as supplier power, substitutes and rivalry also affect profitability depending on the industry situation.",
+      keywords: [
+        "five forces", "threat of new entrants", "bargaining power of buyers",
+        "supplier power", "threat of substitutes", "rivalry",
+        "profitability", "lower prices", "pressure on margin"
+      ]
+    },
+    {
+      id: 20,
+      topic: "strategy",
+      code: "Q20 – Competitive strategies ★",
+      marks: 6,
+      text: "Explain Porter’s three generic competitive strategies (cost leadership, differentiation, focus) and give ONE example for ANY TWO of them.",
+      suggested: [
+        "Cost leadership: lowest cost, lower prices; example: low‑cost airline, budget supermarket",
+        "Differentiation: unique features/quality/service; example: Apple design, luxury brand",
+        "Focus: narrow segment/niche; example: bank for SMEs, organic‑only shop"
+      ],
+      fullAnswer: "Strategy 1: Cost leadership. The firm aims to be the lowest‑cost producer and can offer lower prices, for example a low‑cost airline or budget supermarket. Strategy 2: Differentiation. The firm offers unique features, quality or service that customers value, for example Apple’s design or a luxury brand. Strategy 3: Focus. The firm targets a narrow segment or niche, such as a bank focusing on SMEs or an organic‑only shop, and can use cost or differentiation within that segment.",
+      keywords: [
+        "cost leadership", "low cost", "low price",
+        "differentiation", "unique features", "quality", "service",
+        "focus strategy", "niche", "segment",
+        "example", "budget supermarket", "low cost airline", "luxury brand", "SME bank", "organic shop"
+      ]
+    },
+    {
+      id: 21,
+      topic: "digital",
+      code: "Q21 – Cloud computing ★",
+      marks: 4,
+      text: "Describe TWO benefits and TWO risks of using cloud computing for a business.",
+      suggested: [
+        "Benefits: scalability/flexibility; lower upfront investment/pay‑as‑you‑go; access anywhere",
+        "Risks: security/privacy concerns; downtime/reliability issues; vendor lock‑in"
+      ],
+      fullAnswer: "Benefit 1: Scalability and flexibility. Cloud computing lets a business quickly increase or decrease computing resources as needed. Benefit 2: Lower upfront cost and access. Firms pay as they go instead of buying hardware and can access systems from anywhere with internet. Risk 1: Security and privacy concerns. Data stored in the cloud may be exposed if the provider is attacked or misconfigures security. Risk 2: Downtime and vendor lock‑in. Outages at the provider can stop services, and it may be hard to move to another provider.",
+      keywords: [
+        "scalability", "flexibility",
+        "lower upfront investment", "pay as you go",
+        "access anywhere", "internet",
+        "security", "privacy", "downtime", "reliability", "vendor lock in"
+      ]
+    },
+    {
+      id: 22,
+      topic: "digital",
+      code: "Q22 – Internet+ / Taobao platform ★",
+      marks: 4,
+      text: "Using Taobao as an example, explain what is meant by an Internet+ / platform business.",
+      suggested: [
+        "Platform connects buyers and sellers via internet; reduces search costs, provides payment/logistics/ratings; earns commissions/ads/value‑added services"
+      ],
+      fullAnswer: "Definition: Platform business. An Internet+ / platform business connects multiple user groups, such as buyers and sellers, through the internet. Example: Taobao. It brings together many small sellers and many buyers, reducing search costs and making price and product comparison easy. It also provides payment, logistics and rating systems, and earns revenue from commissions on transactions, advertising and value‑added services.",
+      keywords: [
+        "platform", "internet plus", "two sided", "multi sided",
+        "buyers", "sellers",
+        "search cost", "comparison",
+        "payment", "logistics", "rating system",
+        "commission", "advertising", "value added service"
+      ]
+    },
+    {
+      id: 23,
+      topic: "digital",
+      code: "Q23 – Freemium / Freeconomics ★",
+      marks: 4,
+      text: "Explain the freemium business model and how a company can earn money when many users do not pay.",
+      suggested: [
+        "Freemium = free basic version + paid premium features; small % pay; revenue from upgrades, ads, extra services"
+      ],
+      fullAnswer: "Definition: Freemium model. A freemium model offers a free basic version of a service and charges for premium features. Revenue: Even though many users do not pay, a small percentage upgrade to the paid version, and the company can also earn money from advertising shown to free users and from extra paid services such as add‑ons or advanced support.",
+      keywords: [
+        "freemium", "free basic", "premium", "paid features",
+        "small percentage pay", "conversion",
+        "advertising", "ads", "extra service"
+      ]
+    },
+    {
+      id: 24,
+      topic: "digital",
+      code: "Q24 – Generative AI / LLM ★",
+      marks: 4,
+      text: "What is generative AI (such as large language models), and give ONE business use and ONE risk.",
+      suggested: [
+        "Generative AI/LLM: generates new content from large data; use: draft content/chatbots/summarise docs; risk: privacy, inaccurate/bias, over‑reliance"
+      ],
+      fullAnswer: "Definition: Generative AI and LLMs. They are AI models that generate new content, such as text or images, from patterns learned from large amounts of data. Business use: A firm can use a large language model to draft emails, reports or marketing content or to run chatbots for customer service. Risk: There are data privacy risks when sensitive data is sent to external AI services, and outputs may be inaccurate, misleading or biased, so over‑reliance can be dangerous.",
+      keywords: [
+        "generative ai", "large language model", "LLM", "generate text", "generate image",
+        "draft email", "report", "marketing content", "chatbot", "customer service", "summarise", "analyse document",
+        "data privacy", "sensitive data", "inaccurate", "misleading", "bias", "over reliance"
+      ]
+    },
+    {
+      id: 25,
+      topic: "digital",
+      code: "Q25 – SMACIT ★",
+      marks: 4,
+      text: "What does SMACIT stand for, and briefly explain how these technologies together support digital transformation.",
+      suggested: [
+        "SMACIT = Social, Mobile, Analytics, Cloud, IoT; together: reach customers, get insights, flexible IT, real‑time data"
+      ],
+      fullAnswer: "Definition: SMACIT. It stands for Social, Mobile, Analytics, Cloud and Internet of Things. Role in digital transformation: Social and Mobile channels help firms reach and engage customers anywhere. Analytics turns big data into insights for better decisions. Cloud provides flexible and scalable IT infrastructure. IoT generates real‑time data from devices to improve operations and services. Together, these technologies enable major digital changes in how a business operates.",
+      keywords: [
+        "social", "mobile", "analytics", "cloud", "internet of things",
+        "reach customers", "engage", "anywhere",
+        "insight", "big data",
+        "flexible IT", "scalable",
+        "real time data", "devices", "operations"
+      ]
+    },
+    {
+      id: 26,
+      topic: "digital",
+      code: "Q26 – Big Data vs Deep Data ★",
+      marks: 4,
+      text: "Explain the difference between Big Data and Deep Data, and why Deep Data can be useful for business decision‑making.",
+      suggested: [
+        "Big Data: large/fast/varied data (4Vs); Deep Data: smaller, focused, well‑analysed subset; Deep Data gives clear, actionable insights"
+      ],
+      fullAnswer: "Concept 1: Big Data. It refers to extremely large, fast and varied data sets, often described by the 4Vs: volume, velocity, variety and veracity. Concept 2: Deep Data. It is a smaller, focused and well‑analysed subset of data that extracts meaningful insights. Usefulness: Deep Data helps managers avoid being overwhelmed by raw data and instead provides clear, actionable patterns and insights for business decision‑making.",
+      keywords: [
+        "big data", "volume", "velocity", "variety", "veracity",
+        "deep data", "focused", "well analysed", "insight",
+        "actionable", "decision making"
+      ]
+    },
+    {
+      id: 27,
+      topic: "wallet_social",
+      code: "Q27 – Digital wallet / SVF ★",
+      marks: 4,
+      text: "What is a digital wallet / Stored Value Facility (SVF), and explain ONE benefit and ONE risk of using it.",
+      suggested: [
+        "Digital wallet/SVF: electronic account/app storing value/payment info; examples: Octopus, PayMe, Alipay, WeChat Pay; benefit: convenience/speed; risk: security/system failure/privacy"
+      ],
+      fullAnswer: "Definition: Digital wallet / Stored Value Facility. It is an electronic account or app that stores value or payment information and is used for electronic payments instead of cash, for example Octopus, PayMe, Alipay or WeChat Pay. Benefit: Convenience and speed. Users can pay quickly without carrying cash or cards. Risk: Security and reliability. If the account is hacked or stolen, or if the system fails, users may lose money or be unable to pay, and there can also be privacy concerns.",
+      keywords: [
+        "digital wallet", "stored value facility", "SVF",
+        "store value", "payment information", "electronic payment",
+        "octopus", "payme", "alipay", "wechat pay",
+        "convenience", "speed", "no cash",
+        "security", "hacking", "stolen account", "system failure", "privacy"
+      ]
+    },
+    {
+      id: 28,
+      topic: "wallet_social",
+      code: "Q28 – Social commerce & digital analytics ★",
+      marks: 4,
+      text: "Explain what is meant by social commerce, and describe how digital analytics on social media can help a business improve its marketing.",
+      suggested: [
+        "Social commerce: using social media to support/complete buying and selling; analytics: track views/likes/shares/comments/clicks/conversions to adjust content/timing/targeting"
+      ],
+      fullAnswer: "Definition: Social commerce. It means using social media platforms to support and complete buying and selling, for example when users view and buy products directly through posts, links or live streams. Role of analytics: Digital analytics on social media track views, likes, shares, comments, clicks and conversions. Benefit: By understanding customer behaviour and preferences, businesses can adjust their content, timing and targeting to improve marketing effectiveness.",
+      keywords: [
+        "social commerce", "social media", "buying", "selling",
+        "view and buy", "posts", "links", "live streams",
+        "views", "likes", "shares", "comments", "clicks", "conversions",
+        "behaviour", "preference", "content", "timing", "targeting", "marketing effectiveness"
+      ]
+    },
+    {
+      id: 29,
+      topic: "extra",
+      code: "Q29 – IT governance",
+      marks: 4,
+      text: "What is IT governance and why is it important in organisations?",
+      suggested: [
+        "IT governance: framework to ensure IT supports business objectives and manages risks; involves alignment, value delivery, risk management, performance, compliance; important for accountability and effective use of IT investments"
+      ],
+      fullAnswer: "Definition: IT governance. It is a framework and set of processes to ensure that IT supports business objectives and manages risks. Elements: It involves alignment of IT with business goals, value delivery, risk management, performance measurement and compliance. Importance: IT governance is important for accountability and for ensuring effective and efficient use of IT investments in the organisation.",
+      keywords: [
+        "IT governance", "framework",
+        "business objectives", "alignment",
+        "value delivery", "risk management", "performance", "compliance",
+        "accountability", "IT investment"
+      ]
+    },
+    {
+      id: 30,
+      topic: "extra",
+      code: "Q30 – CRM",
+      marks: 4,
+      text: "What is Customer Relationship Management (CRM) and why do firms use it?",
+      suggested: [
+        "CRM manages customer info/interactions; aims to improve satisfaction, retention, loyalty, sales; supports marketing, sales, customer service"
+      ],
+      fullAnswer: "Definition: Customer Relationship Management. CRM is a system and approach for managing customer information and interactions. Purpose: Firms use CRM to improve customer satisfaction, retention, loyalty and sales. Support: CRM supports marketing, sales and customer service by providing a single view of the customer and helping firms target and serve them better.",
+      keywords: [
+        "customer relationship management", "CRM",
+        "customer information", "customer interaction",
+        "satisfaction", "retention", "loyalty", "sales",
+        "marketing", "sales", "customer service"
+      ]
+    },
+    {
+      id: 31,
+      topic: "extra",
+      code: "Q31 – Value chain",
+      marks: 4,
+      text: "What is the value chain model and how can IS create value in it?",
+      suggested: [
+        "Value chain = primary + support activities; IS improves efficiency, coordination, info sharing in each activity"
+      ],
+      fullAnswer: "Definition: Value chain model. It divides a firm into primary and support activities that together add value to products and services. Primary activities include inbound logistics, operations, outbound logistics, marketing and sales and service, while support activities include firm infrastructure, HR, technology and procurement. Role of IS: Information systems can create value by improving efficiency, coordination and information sharing in each activity, reducing costs or enhancing differentiation.",
+      keywords: [
+        "value chain", "primary activities", "support activities",
+        "inbound logistics", "operations", "outbound logistics", "marketing", "sales", "service",
+        "infrastructure", "HR", "technology", "procurement",
+        "efficiency", "coordination", "information sharing"
+      ]
+    },
+    {
+      id: 32,
+      topic: "extra",
+      code: "Q32 – Information system basics ★",
+      marks: 4,
+      text: "What is an information system (IS)? Briefly describe its main components and purpose.",
+      suggested: [
+        "IS: system to collect, process, store, distribute information; components: hardware, software, data, people, procedures; purpose: support operations, decisions, control"
+      ],
+      fullAnswer: "Definition: Information system. An IS is a system that collects, processes, stores and distributes information. Components: The main components are hardware, software, data, people and procedures. Purpose: The purpose of an information system is to support an organisation’s operations, decision‑making and control.",
+      keywords: [
+        "information system", "collect", "process", "store", "distribute",
+        "hardware", "software", "data", "people", "procedures",
+        "support operations", "decision", "control"
+      ]
+    }
   ];
 
-  let currentUser = null;
-  let stats = { answered: 0, correct: 0 };
   let currentQuestion = null;
-  let hasAnswered = false;
+  let answeredCount = 0;
+  let totalCoveragePercent = 0;
 
-  function loadStatsForUser(username) {
-    const key = "im_stats_" + username;
-    const saved = localStorage.getItem(key);
-    if (saved) {
-      stats = JSON.parse(saved);
-    } else {
-      stats = { answered: 0, correct: 0 };
+  function pickRandomQuestion(topic) {
+    let pool = questions;
+    if (topic && topic !== "all") {
+      pool = questions.filter(q => q.topic === topic);
     }
-    updateStats();
-  }
-
-  function saveStatsForUser() {
-    if (!currentUser) return;
-    const key = "im_stats_" + currentUser;
-    localStorage.setItem(key, JSON.stringify(stats));
-  }
-
-  function updateStats() {
-    const acc = stats.answered === 0 ? 0 : Math.round((stats.correct / stats.answered) * 100);
-    document.getElementById('statsArea').textContent =
-      `User: ${currentUser || "(none)"} | Questions answered: ${stats.answered} | Correct: ${stats.correct} | Accuracy: ${acc}%`;
-  }
-
-  function getFilteredQuestions() {
-    const topic = document.getElementById('topicSelect').value;
-    if (topic === 'all') return questions;
-    return questions.filter(q => q.topic === topic);
-  }
-
-  function shuffleArray(arr) {
-    const a = arr.slice();
-    for (let i = a.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [a[i], a[j]] = [a[j], a[i]];
-    }
-    return a;
+    if (pool.length === 0) return null;
+    const idx = Math.floor(Math.random() * pool.length);
+    return pool[idx];
   }
 
   function renderQuestion() {
-    const quizArea = document.getElementById('quizArea');
-    const pool = getFilteredQuestions();
-    if (pool.length === 0) {
-      quizArea.innerHTML = "<p>No questions available for this topic yet.</p>";
+    const topic = document.getElementById("topicSelect").value;
+    currentQuestion = pickRandomQuestion(topic);
+    const container = document.getElementById("questionContainer");
+    if (!currentQuestion) {
+      container.innerHTML = "<p>No questions for this topic.</p>";
       return;
     }
+    container.innerHTML = `
+      <div class="q-meta">
+        <span>${currentQuestion.code}</span>
+        ${currentQuestion.code.includes("★") ? '<span class="badge">Exam focus</span>' : ""}
+        <span style="float:right;">Marks: ${currentQuestion.marks}</span>
+      </div>
+      <div class="question-text">${currentQuestion.text}</div>
+      <label for="answerArea" style="font-size:12px;color:#475569;">Your answer:</label>
+      <textarea id="answerArea" placeholder="Type your answer here."></textarea>
+      <div class="actions">
+        <button class="primary" id="checkBtn">Check Answer</button>
+        <button class="secondary" id="clearBtn">Clear</button>
+        <button class="secondary" id="nextBtn">Next Question</button>
+      </div>
+      <div id="feedback" class="feedback" style="display:none;"></div>
 
-    currentQuestion = pool[Math.floor(Math.random() * pool.length)];
-    hasAnswered = false;
+      <details>
+        <summary>Show suggested key points (bullets)</summary>
+        <ul style="margin-top:6px;padding-left:18px;">
+          ${currentQuestion.suggested.map(s => `<li>${s}</li>`).join("")}
+        </ul>
+      </details>
 
-    const idxs = shuffleArray(currentQuestion.options.map((_, i) => i));
-    let html = `<div class="question-text">${currentQuestion.question}`;
-    if (currentQuestion.star) html += ` <span class="pill">Exam focus *</span>`;
-    html += `</div><ul class="options">`;
+      ${currentQuestion.fullAnswer ? `
+      <details>
+        <summary>Show suggested full answer (short paragraph)</summary>
+        <p style="margin-top:6px;">${currentQuestion.fullAnswer}</p>
+      </details>` : ""}
+    `;
 
-    idxs.forEach((optIdx, i) => {
-      html += `
-        <li>
-          <label>
-            <input type="radio" name="option" value="${optIdx}">
-            (${String.fromCharCode(65 + i)}) ${currentQuestion.options[optIdx]}
-          </label>
-        </li>`;
-    });
+    document.getElementById("checkBtn").onclick = checkAnswer;
+    document.getElementById("clearBtn").onclick = () => {
+      document.getElementById("answerArea").value = "";
+      const fb = document.getElementById("feedback");
+      fb.style.display = "none";
+      fb.innerHTML = "";
+    };
+    document.getElementById("nextBtn").onclick = renderQuestion;
+  }
 
-    html += `</ul><button id="checkBtn">Check Answer</button>
-             <div id="feedback" class="feedback" style="display:none;"></div>`;
-
-    quizArea.innerHTML = html;
-    document.getElementById('checkBtn').onclick = checkAnswer;
+  function normalise(text) {
+    return text
+      .toLowerCase()
+      .replace(/[.,;:(){}\[\]!?"'、，。；：！？”“]/g, " ")
+      .replace(/\s+/g, " ")
+      .trim();
   }
 
   function checkAnswer() {
-    if (hasAnswered) return;
-    const selected = document.querySelector('input[name="option"]:checked');
-    const fb = document.getElementById('feedback');
+    if (!currentQuestion) return;
+    const textarea = document.getElementById("answerArea");
+    if (!textarea) return;
+    const userRaw = textarea.value;
+    const user = normalise(userRaw);
 
-    if (!selected) {
-      fb.style.display = "block";
-      fb.className = "feedback incorrect";
-      fb.textContent = "Please select an option first.";
-      return;
-    }
+    const kws = currentQuestion.keywords || [];
+    if (kws.length === 0) return;
 
-    hasAnswered = true;
-    stats.answered += 1;
-    const chosen = parseInt(selected.value, 10);
-    const isCorrect = (chosen === currentQuestion.answer);
+    let hit = 0;
+    const found = [];
+    const missed = [];
 
-    if (isCorrect) {
-      stats.correct += 1;
-      fb.className = "feedback correct";
-      fb.textContent = "Correct! " + currentQuestion.explanation;
-    } else {
-      fb.className = "feedback incorrect";
-      const correctText = currentQuestion.options[currentQuestion.answer];
-      fb.textContent =
-        `Not correct. The best answer is: "${correctText}". ` + currentQuestion.explanation;
-    }
+    kws.forEach(kw => {
+      const kwNorm = normalise(kw);
+      if (!kwNorm) return;
+      if (user.includes(kwNorm)) {
+        hit++;
+        found.push(kw);
+      } else {
+        missed.push(kw);
+      }
+    });
 
-    fb.style.display = "block";
-    saveStatsForUser();
+    const coverage = Math.round((hit / kws.length) * 100);
+
+    answeredCount++;
+    totalCoveragePercent += coverage;
     updateStats();
+
+    const feedback = document.getElementById("feedback");
+    feedback.style.display = "block";
+    feedback.innerHTML = `
+      <strong>Keyword coverage: ${coverage}%</strong><br>
+      Matched: ${hit} / ${kws.length} key ideas.<br>
+      <span style="color:#15803d;">Found:</span> ${found.length ? found.join(", ") : "(none)"}<br>
+      <span style="color:#b91c1c;">Missing:</span> ${missed.length ? missed.join(", ") : "(none)"}
+    `;
   }
 
-  document.getElementById('newQuestionBtn').addEventListener('click', renderQuestion);
+  function updateStats() {
+    const stats = document.getElementById("statsArea");
+    const avg = answeredCount === 0 ? 0 : Math.round(totalCoveragePercent / answeredCount);
+    stats.textContent = `Questions answered: ${answeredCount} · Avg keyword coverage: ${avg}%`;
+  }
 
-  document.getElementById('loadUserBtn').addEventListener('click', () => {
-    const nameInput = document.getElementById('usernameInput').value.trim();
-    if (!nameInput) {
-      alert("Please enter a username.");
-      return;
-    }
-    currentUser = nameInput;
-    loadStatsForUser(currentUser);
-    renderQuestion();
-  });
+  document.getElementById("newQuestionBtn").onclick = renderQuestion;
+  document.getElementById("topicSelect").onchange = renderQuestion;
 
-  // initial state: no user yet
-  currentUser = null;
-  updateStats();
   renderQuestion();
+  updateStats();
 </script>
 </body>
 </html>
